@@ -2,6 +2,7 @@
 #include <client.h>
 #include <stdlib.h>
 #include <QList>
+#include <QObject>
 
 struct Command {
     QString cmd;
@@ -13,14 +14,14 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     Client client;
-    client.connecttohost();
-    //client.sendUsername();
+    client.doConnect();
+    client.connected();
+    client.logIn();
 
-    QList<Command> commands({
-            {"cmd.USER", "danka"},// login
-            {"cmd.PORT", ""},         // announce port for data connection, args added below.
-            //{"cmd.RETR", file}        // retrieve a file
-        });
+    client.list("Arduino");
+
+    //client.disconnected();
+
 
     return a.exec();
 }
