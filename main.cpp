@@ -19,8 +19,9 @@ int main(int argc, char *argv[])
     client.logIn();
 
     client.list("Arduino");
+    client.downloadFile();
 
-    //client.disconnected();
+    client.disconnected();
 
 
     return a.exec();

@@ -75,14 +75,16 @@ void Client::list(const QString &dir)
     socket->write(Passive ? "PASV\r\n" : "PORT\r\n");
 
     socket1 = new QTcpSocket(this);
-    connect(socket, SIGNAL(readyRead1()),this, SLOT(readyRead1()));
     socket1->bind(QHostAddress::LocalHost, 101);
+    connect(socket1, SIGNAL(readyRead()),this, SLOT(readyRead1()));
+
     socket1->connectToHost(QHostAddress::LocalHost, 1024);
 
     if (dir.isEmpty())
-       socket1->write("LIST\r\n");
+       socket->write("LIST\r\n");
     else
-       socket1->write("LIST -al \r\n\r\n");
+       socket->write("LIST -al \r\n\r\n");
+    //socket->waitForReadyRead();
 
 }
 
@@ -98,8 +100,16 @@ void Client::readyRead1()
     QByteArray buffer1;
     buffer1.append(socket1->readAll());
     qDebug() << buffer1;
-
 }
+void Client::downloadFile()
+{
+    socket->waitForReadyRead(5000);
+    socket->write("TYPE I\r\n");
+    socket->write("SIZE main.cpp\r\n\r\n\r\n\r\n");
+    socket->write("RETR main.cpp\r\n\r\n\r\n\r\n");
+    socket->waitForBytesWritten(5000);
+}
+
 void Client::disconnected(){
     socket->write("QUIT \r\n");
     if(!socket->waitForConnected(5000))

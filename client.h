@@ -16,6 +16,9 @@ public:
     void doConnect();
     void connected();
     void disconnected();
+    void logIn();
+    void list(const QString &dir);
+    void downloadFile();
 
     enum TransferMode {
             Active,
@@ -32,13 +35,10 @@ signals:
 public slots:
     void readyRead();
     void readyRead1();
-    void logIn();
-    void list(const QString &dir);
 
 private:
     QTcpSocket *socket;
     QTcpSocket *socket1;
-
 };
 
 #endif // CLIENT_H
