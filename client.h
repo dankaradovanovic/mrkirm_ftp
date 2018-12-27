@@ -15,19 +15,17 @@ public:
     void connecttohost();
     void doConnect();
     void connected();
-    void disconnected();
     void logIn();
     void list(const QString &dir);
     void downloadFile();
+    void disconnected(); 
+    void wait();
 
     enum TransferMode {
             Active,
             Passive
         };
 
-    //void logIn(const QString user, const QString password);
-    //void command(const QByteArray &command, const QByteArray &params);
-   // QTcpSocket *socket;
 
 signals:
 
@@ -39,6 +37,8 @@ public slots:
 private:
     QTcpSocket *socket;
     QTcpSocket *socket1;
+
+
 };
 
 #endif // CLIENT_H

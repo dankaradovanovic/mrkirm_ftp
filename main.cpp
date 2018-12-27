@@ -18,6 +18,8 @@ int main(int argc, char *argv[])
     client.connected();
     client.logIn();
 
+    //if(-1){client.logIn();}
+
     client.list("Arduino");
     client.downloadFile();
 
