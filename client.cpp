@@ -101,8 +101,7 @@ void Client::readyRead1()
     buffer1.append(socket1->readAll());
 
     for(int i=0; i<buffer1.size();i++ ){
-        buffer1.replace("\r\n","\n");
-       // buffer1.replace("      ","\n");
+        buffer1.replace("\r\n","\n                                                          ");
     }
 
     qDebug() << buffer1;
@@ -134,7 +133,7 @@ void Client::downloadFile()
      socket->write(fi.toStdString().c_str());
      wait();
 
-     QString file_name= "C:/Users/student/Desktop/ra206/";
+     QString file_name= "C:/Users/Danka/Desktop/mrkirm/";
      file_name += filename;
 
      QFile file(file_name);
